@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <title>Welcome to TodoAPP!</title>
+    </head>
+    <body>
+        <h1>To do!</h1>
+
+        <ol>
+            {% if todo_list %}
+                {% for item in todo_list %}
+                    <li>{{ item.content }}, {{ item.creation_date }}</li>
+                    <form action="/deletetodo/{{ item.id }}/" method="post"> {% csrf_token %}
+                        <input type="submit" value="Delete">
+                    </form>
+                {% endfor %}
+            {% endif %}
+        </ol>
+
+        <form action="/addtodo/" method="post"> {% csrf_token %}
+            <input type="text" name="item">
+            <input type="submit" value="Add">
+        </form>
+
+    </body>
+</html>
